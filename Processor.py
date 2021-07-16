@@ -157,10 +157,11 @@ def main():
     # Lasso is highly accurate in this case and is best suited for it.
 
     x_train, x_test, y_train, y_test = train_test_split(featuresColumn, derivedColumn, test_size=0.66, random_state=1, shuffle=True)
-    setup = make_pipeline(StandardScaler(), PCA(n_components=8))
-    x_train, x_test, y_train, y_test = setup.fit(x_train, x_test, y_train, y_test)
-    regr = MLPRegressor(random_state=0, max_iter=500).fit(x_train, y_train)
-    print(regr.predict(x_test[:2]))
+    regr = MLPRegressor(random_state=0, max_iter=1000).fit(x_train, y_train)
+    # MLPmodelPrediction = regr.predict()
+
+    print('\nPerformance of MLP Regression')
+    print('{:.2%}\n'.format(regr.score(x_test, y_test)))
 
     sys.exit()
 
